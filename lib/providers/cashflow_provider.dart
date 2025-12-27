@@ -20,4 +20,14 @@ class CashflowProvider extends ChangeNotifier {
     _transactions.add(transaction);
     notifyListeners();
   }
+
+  void updateTransaction(int index, CashTransaction transaction) {
+    _transactions[index] = transaction;
+    notifyListeners();
+  }
+
+  void deleteTransaction(int index) {
+    _transactions.removeAt(index);
+    notifyListeners();
+  }
 }
