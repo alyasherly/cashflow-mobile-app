@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'savings.dart';
+import 'package:provider/provider.dart'; // PACKAGE
+import 'providers/cashflow_provider.dart'; // FILE KITA
+import 'models/transaction_model.dart';
 import 'transaction_form.dart';
 
 class Dashboard extends StatelessWidget {
@@ -7,41 +9,55 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          const Text(
-            'Dashboard',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
+    final cashflow = context.watch<CashflowProvider>();
 
-          const Card(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('Balance: Rp 10.000.000'),
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            const Text('Balance', style: TextStyle(fontSize: 18)),
+            const SizedBox(height: 8),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Rp ${cashflow.balance.toStringAsFixed(0)}',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 16),
-          ListTile(
-            title: const Text('Cards'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const Savings()),
+            const SizedBox(height: 24),
+            const Text('Latest Transactions',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+
+            ...cashflow.transactions.map(
+              (t) => ListTile(
+                title: Text(t.category),
+                subtitle: Text(t.savingsType),
+                trailing: Text(
+                  '${t.type == TransactionType.income ? '+' : '-'}Rp ${t.amount}',
+                  style: TextStyle(
+                    color: t.type == TransactionType.income
+                        ? Colors.green
+                        : Colors.red,
+                  ),
+                ),
+              ),
             ),
-          ),
-          ListTile(
-            title: const Text('Add Income / Expense'),
-            trailing: const Icon(Icons.add),
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const TransactionForm()),
-            ),
-          ),
-        ],
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const TransactionForm()),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

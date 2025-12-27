@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'dashboard.dart';
 import 'savings.dart';
-import 'statistics.dart';
+import 'statistic.dart';
 import 'profile.dart';
 
 class Home extends StatefulWidget {
