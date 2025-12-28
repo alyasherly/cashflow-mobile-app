@@ -6,6 +6,7 @@ class CashTransaction {
   final String savingsType;
   final DateTime date;
   final TransactionType type;
+  final String? attachmentPath;
 
   CashTransaction({
     required this.amount,
@@ -13,5 +14,6 @@ class CashTransaction {
     required this.savingsType,
     required this.date,
     required this.type,
+    this.attachmentPath,
   });
 }
