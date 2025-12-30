@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'providers/cashflow_provider.dart';
+import '../../providers/cashflow_provider.dart';
 
 class Savings extends StatelessWidget {
   const Savings({super.key});

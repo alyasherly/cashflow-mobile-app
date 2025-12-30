@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/cashflow_provider.dart';
-import 'models/transaction_model.dart';
-import 'transaction_form.dart';
+import '../../providers/cashflow_provider.dart';
+import '../../models/transaction_model.dart';
+import '../transaction/transaction_form.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});

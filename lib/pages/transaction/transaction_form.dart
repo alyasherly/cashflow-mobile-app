@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'providers/cashflow_provider.dart';
-import 'models/transaction_model.dart';
+import '../../providers/cashflow_provider.dart';
+import '../../models/transaction_model.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'widgets/attachment_preview.dart';
+import '../../widgets/attachment_preview.dart';
 
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';

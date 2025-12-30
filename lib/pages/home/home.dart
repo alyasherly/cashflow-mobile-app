@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import 'dashboard.dart';
-import 'savings.dart';
-import 'statistic.dart';
-import 'profile.dart';
+import '../transaction/savings.dart';
+import '../history/history.dart';
+import '../profile/profile.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'splash.dart';
+import 'pages/splash/splash.dart';
 import 'providers/cashflow_provider.dart';
 
 void main() {
