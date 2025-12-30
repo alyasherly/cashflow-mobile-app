@@ -14,11 +14,13 @@ import 'package:path/path.dart' as p;
 class TransactionForm extends StatefulWidget {
   final CashTransaction? transaction;
   final int? index;
+  final TransactionType? initialType;
 
   const TransactionForm({
     super.key,
     this.transaction,
     this.index,
+    this.initialType,
   });
 
   @override
@@ -46,7 +48,16 @@ class _TransactionFormState extends State<TransactionForm> {
       _selectedDate = widget.transaction!.date;
       _type = widget.transaction!.type;
       _attachmentPath = widget.transaction!.attachmentPath;
+    } else if (widget.initialType != null) {
+      _type = widget.initialType!;
     }
+  }
+
+  @override
+  void dispose() {
+    _amountCtrl.dispose();
+    _categoryCtrl.dispose();
+    super.dispose();
   }
 
   /// ===== SAVE FILE TO LOCAL STORAGE =====
@@ -79,15 +90,17 @@ class _TransactionFormState extends State<TransactionForm> {
       final savedPath = await _saveAttachmentToLocal(originalFile);
 
       setState(() {
-        _attachmentPath = savedPath; // ✅ PATH AMAN
+        _attachmentPath = savedPath;
       });
     }
   }
 
   /// ===== SUBMIT =====
   void _submit() {
+    if (_amountCtrl.text.isEmpty || _categoryCtrl.text.isEmpty) return;
+
     final transaction = CashTransaction(
-      amount: double.parse(_amountCtrl.text),
+      amount: double.tryParse(_amountCtrl.text) ?? 0,
       category: _categoryCtrl.text,
       savingsType: _savingsType,
       date: _selectedDate,
@@ -99,7 +112,7 @@ class _TransactionFormState extends State<TransactionForm> {
 
     if (widget.transaction == null) {
       provider.addTransaction(transaction);
-    } else {
+    } else if (widget.index != null) {
       provider.updateTransaction(widget.index!, transaction);
     }
 
@@ -165,7 +178,11 @@ class _TransactionFormState extends State<TransactionForm> {
                     ),
                   )
                   .toList(),
-              onChanged: (v) => setState(() => _savingsType = v!),
+              onChanged: (v) {
+                if (v != null) {
+                  setState(() => _savingsType = v);
+                }
+              },
               decoration:
                   const InputDecoration(labelText: 'Savings Type'),
             ),
@@ -183,7 +200,13 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: Text('Expense'),
                 ),
               ],
-              onChanged: (v) => setState(() => _type = v!),
+              onChanged: widget.initialType != null
+                  ? null
+                  : (v) {
+                      if (v != null) {
+                        setState(() => _type = v);
+                      }
+                    },
               decoration: const InputDecoration(labelText: 'Type'),
             ),
 
