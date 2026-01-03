@@ -46,9 +46,9 @@ class _SplashState extends State<Splash> {
       case AuthState.unauthenticated:
       case AuthState.lockedOut:
       case AuthState.unknown:
-      default:
         nextPage = const PinLoginPage();
         break;
+
     }
 
     if (mounted) {
@@ -70,7 +70,7 @@ class _SplashState extends State<Splash> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.indigo.withOpacity(0.1),
+                color: Colors.indigo.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(

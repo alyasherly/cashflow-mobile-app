@@ -101,8 +101,8 @@ class _PinLoginPageState extends State<PinLoginPage> {
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       color: isLocked
-                          ? Colors.red.withOpacity(0.1)
-                          : Colors.indigo.withOpacity(0.1),
+                          ? Colors.red.withValues(alpha: 0.1)
+                          : Colors.indigo.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
