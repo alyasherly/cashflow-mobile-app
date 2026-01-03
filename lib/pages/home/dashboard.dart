@@ -5,7 +5,6 @@ import 'package:fl_chart/fl_chart.dart';
 import '../../providers/cashflow_provider.dart';
 import '../../models/transaction_model.dart';
 import '../transaction/transaction_form.dart';
-import '../history/history.dart';
 import '../profile/profile.dart';
 
 class Dashboard extends StatefulWidget {
@@ -105,7 +104,7 @@ class _DashboardState extends State<Dashboard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(_greeting(), style: const TextStyle(fontSize: 14)),
-            const Text('Alya 👋', style: TextStyle(fontSize: 18)),
+            const Text('Welcome 👋', style: TextStyle(fontSize: 18)),
           ],
         ),
         actions: [

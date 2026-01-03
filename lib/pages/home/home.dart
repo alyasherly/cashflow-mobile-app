@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/cashflow_provider.dart';
 import 'dashboard.dart';
 import '../transaction/savings.dart';
 import '../history/history.dart';
@@ -22,6 +24,15 @@ class _HomeState extends State<Home> {
     Statistic(),
     Profile(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize data provider (load from database)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CashflowProvider>().initialize();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -83,8 +83,6 @@ class _StatisticState extends State<Statistic> {
                             MaterialPageRoute(
                               builder: (_) => TransactionForm(
                                 transaction: t,
-                                index:
-                                    provider.transactions.indexOf(t),
                               ),
                             ),
                           );
